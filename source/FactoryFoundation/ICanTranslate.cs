@@ -14,7 +14,7 @@ namespace FactoryFoundation
         where TResult : class
     {
         /// <summary>
-        /// Defines a method for translating between two objects.
+        /// Defines a method for translating from a <typeparamref name="TInitial"/> to <typeparamref name="TResult"/>.
         /// </summary>
         /// <param name="initial">The initial object to translate.</param>
         /// <returns>The resulting translated object.</returns>
