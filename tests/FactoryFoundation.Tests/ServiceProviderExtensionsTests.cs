@@ -3,6 +3,7 @@
 // </copyright>
 
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using FactoryFoundation.Tests.TestEntities;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,6 +56,25 @@ namespace FactoryFoundation.Tests
             var translator = provider.GetService<ICanTranslate<Airplane, AirplaneResponse>>();
 
             Assert.IsNotNull(translator);
+        }
+
+        /// <summary>
+        /// Mixed factories can be resolved.
+        /// </summary>
+        [TestMethod]
+        public void MixedFactories_CanBeResolved()
+        {
+            var collection = new ServiceCollection();
+
+            collection.AddFactoryFoundation(Assembly.GetExecutingAssembly());
+
+            var provider = collection.BuildServiceProvider();
+
+            var translator = provider.GetRequiredService<ITranslator>();
+
+            var response = translator.Translate<IEnumerable<int>, IEnumerable<int>>(new List<int>());
+
+            Assert.IsNotNull(response);
         }
     }
 }
