@@ -2,6 +2,8 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
+using System;
+using System.Collections.Generic;
 using System.Reflection;
 using FactoryFoundation.Tests.TestEntities;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,6 +41,15 @@ namespace FactoryFoundation.Tests
 
             Assert.IsNotNull(result);
             Assert.AreEqual(airplane.Id.ToString(), result.Id);
+        }
+
+        /// <summary>
+        /// Non-registered translators throw exception.
+        /// </summary>
+        [TestMethod]
+        public void Translations_NoRegistrations_ThrowsException()
+        {
+            Assert.ThrowsException<NullReferenceException>(() => _translator.Translate<IEnumerable<string>, IEnumerable<string>>(new List<string>()));
         }
     }
 }
