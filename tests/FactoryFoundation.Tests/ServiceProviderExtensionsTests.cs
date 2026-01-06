@@ -2,12 +2,9 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using FactoryFoundation.Tests.TestEntities;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FactoryFoundation.Tests
 {
@@ -25,7 +22,7 @@ namespace FactoryFoundation.Tests
         {
             var collection = new ServiceCollection();
 
-            Assert.ThrowsException<ArgumentNullException>(() => collection.AddFactoryFoundation());
+            Assert.ThrowsExactly<ArgumentNullException>(() => collection.AddFactoryFoundation());
         }
 
         /// <summary>
@@ -38,7 +35,7 @@ namespace FactoryFoundation.Tests
 
             var collection = new ServiceCollection();
 
-            Assert.ThrowsException<NullReferenceException>(() => collection.AddFactoryFoundation(assembly));
+            Assert.ThrowsExactly<NullReferenceException>(() => collection.AddFactoryFoundation(assembly));
         }
 
         /// <summary>

@@ -2,12 +2,9 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using FactoryFoundation.Tests.TestEntities;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FactoryFoundation.Tests
 {
@@ -49,7 +46,7 @@ namespace FactoryFoundation.Tests
         [TestMethod]
         public void Translations_NoRegistrations_ThrowsException()
         {
-            Assert.ThrowsException<NullReferenceException>(() => _translator.Translate<IEnumerable<string>, IEnumerable<string>>(new List<string>()));
+            Assert.ThrowsExactly<NullReferenceException>(() => _translator.Translate<IEnumerable<string>, IEnumerable<string>>(new List<string>()));
         }
     }
 }

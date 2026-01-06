@@ -2,8 +2,6 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NullReferenceException = System.NullReferenceException;
 
 namespace FactoryFoundation.Tests

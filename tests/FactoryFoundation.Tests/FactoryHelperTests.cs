@@ -2,9 +2,6 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace FactoryFoundation.Tests
 {
     /// <summary>
