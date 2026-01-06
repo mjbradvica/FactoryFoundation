@@ -33,11 +33,10 @@ namespace FactoryFoundation
             var factoryTypes = assemblies
                 .SelectMany(assembly => assembly.GetTypes()
                     .Where(type => !type.IsInterface && !type.IsAbstract)
-                    .Where(type => type.GetInterfaces().Any(interfaceType => interfaceType.IsGenericType && interfaceType.GetGenericTypeDefinition() == typeof(ICanTranslate<,>)))
-                    .ToList())
+                    .Where(type => type.GetInterfaces().Any(interfaceType => interfaceType.IsGenericType && interfaceType.GetGenericTypeDefinition() == typeof(ICanTranslate<,>))))
                 .ToList();
 
-            if (!factoryTypes.Any())
+            if (factoryTypes.Count == 0)
             {
                 throw new NullReferenceException("No factories were found to registration. Did you define any?");
             }
