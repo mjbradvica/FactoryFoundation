@@ -7,7 +7,7 @@ namespace FactoryFoundation.Tests.TestEntities
     /// <summary>
     /// Test response object.
     /// </summary>
-    internal class AirplaneResponse
+    internal sealed class AirplaneResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AirplaneResponse"/> class.

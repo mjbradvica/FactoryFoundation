@@ -27,10 +27,10 @@ namespace FactoryFoundation
             }
             catch (Exception exception)
             {
-                return ValidationEnvelope<TEntity>.Failure(exception);
+                return new ValidationEnvelope<TEntity>(exception);
             }
 
-            return ValidationEnvelope<TEntity>.Success(entity);
+            return new ValidationEnvelope<TEntity>(entity);
         }
     }
 }

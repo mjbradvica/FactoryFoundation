@@ -66,6 +66,7 @@ csharp_style_expression_bodied_properties = true:silent
 csharp_style_expression_bodied_indexers = true:silent
 
 dotnet_diagnostic.SA1101.severity = silent
+dotnet_diagnostic.SA1208.severity = silent
 dotnet_diagnostic.SA1309.severity = silent
 dotnet_diagnostic.IDE0270.severity = silent
 dotnet_diagnostic.IDE0063.severity = silent
@@ -75,3 +76,4 @@ dotnet_diagnostic.IDE0090.severity = silent
 dotnet_diagnostic.IDE0037.severity = silent
 dotnet_diagnostic.IDE0028.severity = none
 dotnet_diagnostic.IDE0301.severity = silent
+dotnet_diagnostic.IDE0290.severity = silent

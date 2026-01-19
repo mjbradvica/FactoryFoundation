@@ -3,11 +3,13 @@
         <EnableNETAnalyzers>True</EnableNETAnalyzers>
         <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
         <AnalysisLevel>latest</AnalysisLevel>
+        <AnalysisMode>Recommended</AnalysisMode>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-        <ImplicitUsings>disable</ImplicitUsings>
+        <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <CheckEolTargetFramework>false</CheckEolTargetFramework>
+        <LangVersion>latest</LangVersion>
+        <CheckEolTargetFramework>true</CheckEolTargetFramework>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">

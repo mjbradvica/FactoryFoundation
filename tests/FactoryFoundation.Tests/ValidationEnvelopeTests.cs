@@ -2,10 +2,6 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NullReferenceException = System.NullReferenceException;
-
 namespace FactoryFoundation.Tests
 {
     /// <summary>
@@ -18,26 +14,26 @@ namespace FactoryFoundation.Tests
         /// Ensures the success method returns the correct properties.
         /// </summary>
         [TestMethod]
-        public void Success_ReturnsCorrectProperties()
+        public void SuccessReturnsCorrectProperties()
         {
             const string result = "result";
 
-            var envelope = ValidationEnvelope<string>.Success(result);
+            var envelope = new ValidationEnvelope<string>(result);
 
             Assert.AreEqual(result, envelope.Entity);
             Assert.IsFalse(envelope.IsInvalid);
-            Assert.IsInstanceOfType<Exception>(envelope.Exception);
+            Assert.IsNull(envelope.Exception);
         }
 
         /// <summary>
         /// Ensures the failure method returns the correct properties.
         /// </summary>
         [TestMethod]
-        public void Failure_ReturnsCorrectProperties()
+        public void FailureReturnsCorrectProperties()
         {
-            var exception = new NullReferenceException();
+            var exception = new ArgumentNullException();
 
-            var envelope = ValidationEnvelope<string>.Failure(exception);
+            var envelope = new ValidationEnvelope<string>(exception);
 
             Assert.AreEqual(exception, envelope.Exception);
             Assert.IsTrue(envelope.IsInvalid);

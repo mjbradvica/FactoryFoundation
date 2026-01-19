@@ -1,0 +1,4 @@
+{
+    "ignorePaths": ["Directory.Build.props", ".gitignore", ".editorconfig"],
+    "words": ["Bradvica"]
+}

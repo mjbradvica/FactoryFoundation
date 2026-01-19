@@ -9,7 +9,7 @@ namespace FactoryFoundation.Tests.TestEntities
     /// <summary>
     /// Test object for translation.
     /// </summary>
-    internal class Airplane
+    internal sealed class Airplane
     {
         /// <summary>
         /// Gets the airplane identifier.
