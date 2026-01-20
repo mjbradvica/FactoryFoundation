@@ -2,8 +2,8 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace FactoryFoundation
 {
@@ -35,7 +35,7 @@ namespace FactoryFoundation
 
             if (factoryTypes.Count == 0)
             {
-                throw new NullReferenceException("No factories were found to registration. Did you define any?");
+                throw new ArgumentNullException(nameof(assemblies), "No factories were found to registration. Did you define any?");
             }
 
             foreach (var factory in factoryTypes)
@@ -44,7 +44,7 @@ namespace FactoryFoundation
                     .GetInterfaces()
                     .Where(interfaceType => interfaceType.IsGenericType && interfaceType.GetGenericTypeDefinition() == typeof(ICanTranslate<,>))
                     .ToList()
-                    .ForEach(interfaceType => services.AddSingleton(interfaceType, factory));
+                    .ForEach(interfaceType => services.AddTransient(interfaceType, factory));
             }
 
             return services;

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="source/FactoryFoundation/FactoryFoundation.csproj" />
+  <Project Path="tests/FactoryFoundation.Tests/FactoryFoundation.Tests.csproj" />
+</Solution>

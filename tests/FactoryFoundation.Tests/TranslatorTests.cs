@@ -2,9 +2,9 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System.Reflection;
 using FactoryFoundation.Tests.TestEntities;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace FactoryFoundation.Tests
 {
@@ -30,7 +30,7 @@ namespace FactoryFoundation.Tests
         /// Ensures translations are correct.
         /// </summary>
         [TestMethod]
-        public void Translations_Are_Correct()
+        public void TranslationsAreCorrect()
         {
             var airplane = new Airplane();
 
@@ -44,9 +44,9 @@ namespace FactoryFoundation.Tests
         /// Non-registered translators throw exception.
         /// </summary>
         [TestMethod]
-        public void Translations_NoRegistrations_ThrowsException()
+        public void TranslationsNoRegistrationsThrowsException()
         {
-            Assert.ThrowsExactly<NullReferenceException>(() => _translator.Translate<IEnumerable<string>, IEnumerable<string>>(new List<string>()));
+            Assert.ThrowsExactly<ArgumentNullException>(() => _translator.Translate<IEnumerable<string>, IEnumerable<string>>(new List<string>()));
         }
     }
 }

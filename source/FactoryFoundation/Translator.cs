@@ -32,7 +32,7 @@ namespace FactoryFoundation
                 return translator.TranslateTo(initial);
             }
 
-            throw new NullReferenceException($"The translator for {typeof(TInitial)} to {typeof(TResult)} could not be found. Did you define one?");
+            throw new ArgumentNullException(nameof(initial), $"The translator for {typeof(TInitial)} to {typeof(TResult)} could not be found. Did you define one?");
         }
     }
 }

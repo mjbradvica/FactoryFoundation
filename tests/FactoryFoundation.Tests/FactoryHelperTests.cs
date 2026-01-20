@@ -14,7 +14,7 @@ namespace FactoryFoundation.Tests
         /// Successful creation returns the newly created entity.
         /// </summary>
         [TestMethod]
-        public void TryCreateValidate_OnSuccess_ReturnsEntity()
+        public void TryCreateValidateOnSuccessReturnsEntity()
         {
             const string result = "result";
 
@@ -27,11 +27,11 @@ namespace FactoryFoundation.Tests
         /// Exceptions are correctly handled in method.
         /// </summary>
         [TestMethod]
-        public void TryCreateValidate_OnException_CatchesCorrectly()
+        public void TryCreateValidateOnExceptionCatchesCorrectly()
         {
-            var envelope = FactoryHelpers.TryCreateValidate<string>(() => throw new NullReferenceException());
+            var envelope = FactoryHelpers.TryCreateValidate<string>(() => throw new ArgumentNullException());
 
-            Assert.IsInstanceOfType<NullReferenceException>(envelope.Exception);
+            Assert.IsInstanceOfType<ArgumentNullException>(envelope.Exception);
         }
     }
 }
