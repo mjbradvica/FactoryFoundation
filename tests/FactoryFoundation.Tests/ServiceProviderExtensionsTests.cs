@@ -2,9 +2,9 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System.Reflection;
 using FactoryFoundation.Tests.TestEntities;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace FactoryFoundation.Tests
 {
@@ -18,7 +18,7 @@ namespace FactoryFoundation.Tests
         /// Exception is throw with no assemblies.
         /// </summary>
         [TestMethod]
-        public void AddFactoryFoundation_NoAssemblies_ThrowsExceptions()
+        public void AddFactoryFoundationNoAssembliesThrowsExceptions()
         {
             var collection = new ServiceCollection();
 
@@ -29,20 +29,20 @@ namespace FactoryFoundation.Tests
         /// Assembly with no factory types throws exception.
         /// </summary>
         [TestMethod]
-        public void AddFactoryFoundation_NoFactoryTypes_ThrowsException()
+        public void AddFactoryFoundationNoFactoryTypesThrowsException()
         {
             var assembly = Assembly.Load("FactoryFoundation");
 
             var collection = new ServiceCollection();
 
-            Assert.ThrowsExactly<NullReferenceException>(() => collection.AddFactoryFoundation(assembly));
+            Assert.ThrowsExactly<ArgumentNullException>(() => collection.AddFactoryFoundation(assembly));
         }
 
         /// <summary>
         /// Valid types are registered correctly.
         /// </summary>
         [TestMethod]
-        public void AddFactoryFoundation_ValidTypes_RegistersCorrectly()
+        public void AddFactoryFoundationValidTypesRegistersCorrectly()
         {
             var collection = new ServiceCollection();
 
@@ -59,7 +59,7 @@ namespace FactoryFoundation.Tests
         /// Mixed factories can be resolved.
         /// </summary>
         [TestMethod]
-        public void MixedFactories_CanBeResolved()
+        public void MixedFactoriesCanBeResolved()
         {
             var collection = new ServiceCollection();
 

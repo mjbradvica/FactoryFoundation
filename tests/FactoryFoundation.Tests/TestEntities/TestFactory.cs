@@ -7,7 +7,7 @@ namespace FactoryFoundation.Tests.TestEntities
     /// <summary>
     /// Test factory.
     /// </summary>
-    internal class TestFactory :
+    internal sealed class TestFactory :
         ICanTranslate<Airplane, AirplaneResponse>
     {
         /// <inheritdoc/>
