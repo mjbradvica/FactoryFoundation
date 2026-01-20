@@ -28,6 +28,8 @@ FactoryFoundation gives you:
   - [Quick Start](#quick-start)
     - [Defining Factories](#defining-factories)
     - [Using the Translator interface](#using-the-translator-interface)
+    - [Factory Helpers](#factory-helpers)
+  - [FAQ](#faq)
 
 ## Samples
 
@@ -86,7 +88,7 @@ public class Program
 
 ### Defining Factories
 
-Defining a factory is straight forward, have a class inherit from the "ICanTranslate" interface and pass the generic types you are translating from and to.
+Defining a factory is straight forward, have a class inherit from the "ICanTranslate" interface of type T and K, where "T" is your initial value and "K" is the value you are mapping to.
 
 ```csharp
 public class AirplaneFactory :
@@ -101,7 +103,7 @@ public class AirplaneFactory :
 
 ### Using the Translator interface
 
-When you required a factory, just inject an "ITranslator" interface into whatever service or handler required.
+When you require a factory, inject an "ITranslator" interface into whatever service or handler required.
 
 ```csharp
 public class MyService
@@ -135,3 +137,32 @@ public class MyService
     }
 }
 ```
+
+> You may also pass the "ICanTranslate" interface if you just need one specific translation.
+
+### Factory Helpers
+
+FactoryFoundation comes with a small helper to make object creation easier.
+
+```csharp
+var envelope = FactoryHelpers.TryCreateValidate(() => new Widget());
+```
+
+The function will attempt to create the object specified, if an exception is thrown, the proper envelope response will be returned.
+
+## FAQ
+
+### Do I Need FactoryFoundation?
+
+The best reasons to use FactoryFoundation is:
+
+1) You prefer having a consistent way of creating objects
+2) You need a single interface for object mapping
+
+### Does FactoryFoundation do any auto mapping?
+
+The library was designed specifically NOT to perform anything automatically. However, there are several advantages to this, FactoryFoundation is far easier to debug versus other automatic libraries. The mapping process can also be significantly faster than other libraries because the process is so simple.
+
+### How long does FactoryFoundation take to learn?
+
+Anyone can learn FactoryFoundation in 3 minutes. There are only two interfaces to use, and a single line configuration.

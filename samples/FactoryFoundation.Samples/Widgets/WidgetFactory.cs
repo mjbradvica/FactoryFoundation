@@ -9,8 +9,21 @@ namespace FactoryFoundation.Samples.Widgets
     /// </summary>
     public class WidgetFactory :
         ICanTranslate<Widget, WidgetResponse>,
-        ICanTranslate<Widget, CompactWidget>
+        ICanTranslate<Widget, CompactWidget>,
+        ICanTranslate<CreateWidgetRequest, Widget>
     {
+        /// <inheritdoc/>
+        public Widget TranslateTo(CreateWidgetRequest initial)
+        {
+            var envelope = FactoryHelpers.TryCreateValidate(() => new Widget
+            {
+                Name = initial.Name,
+                Cost = initial.Cost,
+            });
+
+            return envelope.IsInvalid ? Widget.Empty() : envelope.Entity;
+        }
+
         /// <inheritdoc/>
         WidgetResponse ICanTranslate<Widget, WidgetResponse>.TranslateTo(Widget initial)
         {
