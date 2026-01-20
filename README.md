@@ -2,12 +2,36 @@
 
 A micro-library for factories in dotnet.
 
-## What is FactoryFoundation?
+![web-logo](https://i.imgur.com/j7J9CGF.png)
 
-- Fully typed factories with zero reflection.
-- Consistency via common interfaces.
-- Auto-registration with the DI container.
-- Easy debugging via normal step-through ability.
+![build-status](https://github.com/mjbradvica/FactoryFoundation/workflows/main/badge.svg) ![downloads](https://img.shields.io/nuget/dt/FactoryFoundation) ![nuget](https://img.shields.io/nuget/v/FactoryFoundation) ![activity](https://img.shields.io/github/last-commit/mjbradvica/FactoryFoundation/master)
+
+## Overview
+
+FactoryFoundation gives you:
+
+- :factory: Fully typed factories with zero reflection.
+- :spiral_notepad: Consistency via common interfaces.
+- :package: Auto-registration with the DI container.
+- :bug: Easy debugging via normal step-through ability.
+
+## Table of Contents
+
+- [FactoryFoundation](#factoryfoundation)
+  - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [Samples](#samples)
+  - [Advantages vs Disadvantages of FactoryFoundation](#advantages-vs-disadvantages-of-factoryfoundation)
+  - [Dependencies](#dependencies)
+  - [Installation](#installation)
+  - [Setup](#setup)
+  - [Quick Start](#quick-start)
+    - [Defining Factories](#defining-factories)
+    - [Using the Translator interface](#using-the-translator-interface)
+
+## Samples
+
+If you would like code samples for FactoryFoundation, they can be found [here in the documentation](https://github.com/mjbradvica/FactoryFoundation/tree/master/samples/FactoryFoundation.Samples).
 
 ## Advantages vs Disadvantages of FactoryFoundation
 
@@ -23,18 +47,6 @@ Advantages:
 Disadvantages:
 
 - No automatic mapping
-
-## Table of Contents
-
-- [FactoryFoundation](#factoryfoundation)
-  - [What is FactoryFoundation?](#what-is-factoryfoundation)
-  - [Advantages vs Disadvantages of FactoryFoundation](#advantages-vs-disadvantages-of-factoryfoundation)
-  - [Table of Contents](#table-of-contents)
-  - [Dependencies](#dependencies)
-  - [Installation](#installation)
-  - [Setup](#setup)
-  - [Defining Factories](#defining-factories)
-  - [Using the Translator interface](#using-the-translator-interface)
 
 ## Dependencies
 
@@ -70,7 +82,9 @@ public class Program
 }
 ```
 
-## Defining Factories
+### Quick Start
+
+### Defining Factories
 
 Defining a factory is straight forward, have a class inherit from the "ICanTranslate" interface and pass the generic types you are translating from and to.
 
@@ -85,7 +99,7 @@ public class AirplaneFactory :
 }
 ```
 
-## Using the Translator interface
+### Using the Translator interface
 
 When you required a factory, just inject an "ITranslator" interface into whatever service or handler required.
 
