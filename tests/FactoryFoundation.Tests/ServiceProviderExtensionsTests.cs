@@ -22,7 +22,7 @@ namespace FactoryFoundation.Tests
         {
             var collection = new ServiceCollection();
 
-            Assert.ThrowsException<ArgumentNullException>(() => collection.AddFactoryFoundation());
+            Assert.ThrowsExactly<ArgumentNullException>(() => collection.AddFactoryFoundation());
         }
 
         /// <summary>
