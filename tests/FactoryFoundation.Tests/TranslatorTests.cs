@@ -30,23 +30,75 @@ namespace FactoryFoundation.Tests
         /// Ensures translations are correct.
         /// </summary>
         [TestMethod]
-        public void TranslationsAreCorrect()
+        public void OneTranslationIsCorrect()
         {
-            var airplane = new Airplane();
+            var first = new FirstType();
 
-            var result = _translator.Translate<Airplane, AirplaneResponse>(airplane);
+            var result = _translator.Translate<FirstType, FinalResponse>(first);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(airplane.Id.ToString(), result.Id);
+            Assert.AreEqual(first.Id, result.Id);
         }
 
         /// <summary>
         /// Non-registered translators throw exception.
         /// </summary>
         [TestMethod]
-        public void TranslationsNoRegistrationsThrowsException()
+        public void OneTranslationNoRegistrationsThrowsException()
         {
-            Assert.ThrowsExactly<ArgumentNullException>(() => _translator.Translate<IEnumerable<string>, IEnumerable<string>>(new List<string>()));
+            Assert.ThrowsExactly<ArgumentNullException>(() => _translator.Translate<string, string>(string.Empty));
+        }
+
+        /// <summary>
+        /// Translation is correct.
+        /// </summary>
+        [TestMethod]
+        public void TwoTranslationsAreCorrect()
+        {
+            var first = new FirstType();
+            var second = new SecondType();
+
+            var result = _translator.Translate<FirstType, SecondType, FinalResponse>(first, second);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(first.Id, result.Id);
+            Assert.AreEqual(second.Age, result.Age);
+        }
+
+        /// <summary>
+        /// Non-registered translators throw exception.
+        /// </summary>
+        [TestMethod]
+        public void TwoTranslationNoRegistrationsThrowsException()
+        {
+            Assert.ThrowsExactly<ArgumentNullException>(() => _translator.Translate<string, string, string>(string.Empty, string.Empty));
+        }
+
+        /// <summary>
+        /// Three translation is correct.
+        /// </summary>
+        [TestMethod]
+        public void ThreeTranslationsAreCorrect()
+        {
+            var first = new FirstType();
+            var second = new SecondType();
+            var third = new ThirdType();
+
+            var result = _translator.Translate<FirstType, SecondType, ThirdType, FinalResponse>(first, second, third);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(first.Id, result.Id);
+            Assert.AreEqual(second.Age, result.Age);
+            Assert.AreEqual(third.Name, result.Name);
+        }
+
+        /// <summary>
+        /// Non-registered translators throw exception.
+        /// </summary>
+        [TestMethod]
+        public void ThreeTranslationNoRegistrationsThrowsException()
+        {
+            Assert.ThrowsExactly<ArgumentNullException>(() => _translator.Translate<string, string, string, string>(string.Empty, string.Empty, string.Empty));
         }
     }
 }

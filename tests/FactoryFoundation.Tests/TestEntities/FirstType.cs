@@ -1,4 +1,4 @@
-﻿// <copyright file="Airplane.cs" company="Simplex Software LLC">
+﻿// <copyright file="FirstType.cs" company="Simplex Software LLC">
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
@@ -7,7 +7,7 @@ namespace FactoryFoundation.Tests.TestEntities
     /// <summary>
     /// Test object for translation.
     /// </summary>
-    internal sealed class Airplane
+    internal sealed class FirstType
     {
         /// <summary>
         /// Gets the airplane identifier.
