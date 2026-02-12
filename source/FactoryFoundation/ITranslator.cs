@@ -10,14 +10,36 @@ namespace FactoryFoundation
     public interface ITranslator
     {
         /// <summary>
-        /// Translates an object from the initial to the resulting class.
+        /// Translates an object from the first to the resulting class.
         /// </summary>
-        /// <typeparam name="TInitial">The type of the initial object.</typeparam>
-        /// <typeparam name="TResult">The type of the result object.</typeparam>
-        /// <param name="initial">The object to map to the result.</param>
+        /// <typeparam name="TFirst">The type of the first object.</typeparam>
+        /// <typeparam name="TFinal">The type of the result object.</typeparam>
+        /// <param name="first">The object to map to the result.</param>
         /// <returns>An instance of the resulting class.</returns>
-        TResult Translate<TInitial, TResult>(TInitial initial)
-            where TInitial : class
-            where TResult : class;
+        TFinal Translate<TFirst, TFinal>(TFirst first);
+
+        /// <summary>
+        /// Translates two objects to the resulting class.
+        /// </summary>
+        /// <typeparam name="TFirst">The type of the first object.</typeparam>
+        /// <typeparam name="TSecond">The type of the second object.</typeparam>
+        /// <typeparam name="TFinal">The type of the result object.</typeparam>
+        /// <param name="first">The first object to map from.</param>
+        /// <param name="second">The second object to map from.</param>
+        /// <returns>An instance of the resulting class.</returns>
+        TFinal Translate<TFirst, TSecond, TFinal>(TFirst first, TSecond second);
+
+        /// <summary>
+        /// Translates three objects to the resulting class.
+        /// </summary>
+        /// <typeparam name="TFirst">The type of the first object.</typeparam>
+        /// <typeparam name="TSecond">The type of the second object.</typeparam>
+        /// <typeparam name="TThird">The type of the third object.</typeparam>
+        /// <typeparam name="TFinal">The type fo the result object.</typeparam>
+        /// <param name="first">The first object to map from.</param>
+        /// <param name="second">The second object to map from.</param>
+        /// <param name="third">The third object to map from.</param>
+        /// <returns>An instance of the resulting class.</returns>
+        TFinal Translate<TFirst, TSecond, TThird, TFinal>(TFirst first, TSecond second, TThird third);
     }
 }

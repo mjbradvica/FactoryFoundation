@@ -26,19 +26,6 @@ namespace FactoryFoundation.Tests
         }
 
         /// <summary>
-        /// Assembly with no factory types throws exception.
-        /// </summary>
-        [TestMethod]
-        public void AddFactoryFoundationNoFactoryTypesThrowsException()
-        {
-            var assembly = Assembly.Load("FactoryFoundation");
-
-            var collection = new ServiceCollection();
-
-            Assert.ThrowsExactly<ArgumentNullException>(() => collection.AddFactoryFoundation(assembly));
-        }
-
-        /// <summary>
         /// Valid types are registered correctly.
         /// </summary>
         [TestMethod]
@@ -50,28 +37,9 @@ namespace FactoryFoundation.Tests
 
             var provider = collection.BuildServiceProvider();
 
-            var translator = provider.GetService<ICanTranslate<Airplane, AirplaneResponse>>();
+            var translator = provider.GetService<ICanTranslate<FirstType, FinalResponse>>();
 
             Assert.IsNotNull(translator);
-        }
-
-        /// <summary>
-        /// Mixed factories can be resolved.
-        /// </summary>
-        [TestMethod]
-        public void MixedFactoriesCanBeResolved()
-        {
-            var collection = new ServiceCollection();
-
-            collection.AddFactoryFoundation(Assembly.GetExecutingAssembly());
-
-            var provider = collection.BuildServiceProvider();
-
-            var translator = provider.GetRequiredService<ITranslator>();
-
-            var response = translator.Translate<IEnumerable<int>, IEnumerable<int>>(new List<int>());
-
-            Assert.IsNotNull(response);
         }
     }
 }

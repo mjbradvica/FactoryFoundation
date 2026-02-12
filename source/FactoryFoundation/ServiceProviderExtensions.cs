@@ -27,27 +27,29 @@ namespace FactoryFoundation
                 throw new ArgumentNullException(nameof(assemblies), "No assemblies are available for FactoryFoundation to register. Please pass a parameter for registration.");
             }
 
+            RegisterTypes(services, assemblies, typeof(ICanTranslate<,>));
+            RegisterTypes(services, assemblies, typeof(ICanTranslate<,,>));
+            RegisterTypes(services, assemblies, typeof(ICanTranslate<,,,>));
+
+            return services;
+        }
+
+        private static void RegisterTypes(IServiceCollection services, IEnumerable<Assembly> assemblies, Type type)
+        {
             var factoryTypes = assemblies
                 .SelectMany(assembly => assembly.GetTypes()
-                    .Where(type => !type.IsInterface && !type.IsAbstract)
-                    .Where(type => type.GetInterfaces().Any(interfaceType => interfaceType.IsGenericType && interfaceType.GetGenericTypeDefinition() == typeof(ICanTranslate<,>))))
+                    .Where(assemblyType => !assemblyType.IsInterface && !assemblyType.IsAbstract)
+                    .Where(assemblyType => assemblyType.GetInterfaces().Any(interfaceType => interfaceType.IsGenericType && interfaceType.GetGenericTypeDefinition() == type)))
                 .ToList();
-
-            if (factoryTypes.Count == 0)
-            {
-                throw new ArgumentNullException(nameof(assemblies), "No factories were found to registration. Did you define any?");
-            }
 
             foreach (var factory in factoryTypes)
             {
                 factory
                     .GetInterfaces()
-                    .Where(interfaceType => interfaceType.IsGenericType && interfaceType.GetGenericTypeDefinition() == typeof(ICanTranslate<,>))
+                    .Where(interfaceType => interfaceType.IsGenericType && interfaceType.GetGenericTypeDefinition() == type)
                     .ToList()
                     .ForEach(interfaceType => services.AddTransient(interfaceType, factory));
             }
-
-            return services;
         }
     }
 }

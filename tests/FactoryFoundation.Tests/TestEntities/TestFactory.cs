@@ -8,12 +8,38 @@ namespace FactoryFoundation.Tests.TestEntities
     /// Test factory.
     /// </summary>
     internal sealed class TestFactory :
-        ICanTranslate<Airplane, AirplaneResponse>
+        ICanTranslate<FirstType, FinalResponse>,
+        ICanTranslate<FirstType, SecondType, FinalResponse>,
+        ICanTranslate<FirstType, SecondType, ThirdType, FinalResponse>
     {
         /// <inheritdoc/>
-        public AirplaneResponse TranslateTo(Airplane initial)
+        public FinalResponse TranslateTo(FirstType first)
         {
-            return new AirplaneResponse(initial.Id.ToString());
+            return new FinalResponse
+            {
+                Id = first.Id,
+            };
+        }
+
+        /// <inheritdoc/>
+        public FinalResponse TranslateTo(FirstType first, SecondType second)
+        {
+            return new FinalResponse
+            {
+                Id = first.Id,
+                Age = second.Age,
+            };
+        }
+
+        /// <inheritdoc/>
+        public FinalResponse TranslateTo(FirstType first, SecondType second, ThirdType third)
+        {
+            return new FinalResponse
+            {
+                Id = first.Id,
+                Age = second.Age,
+                Name = third.Name,
+            };
         }
     }
 }

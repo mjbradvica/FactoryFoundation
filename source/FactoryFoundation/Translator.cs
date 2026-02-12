@@ -21,18 +21,42 @@ namespace FactoryFoundation
         }
 
         /// <inheritdoc/>
-        public TResult Translate<TInitial, TResult>(TInitial initial)
-            where TInitial : class
-            where TResult : class
+        public TFinal Translate<TFirst, TFinal>(TFirst first)
         {
-            var translator = _serviceProvider.GetService<ICanTranslate<TInitial, TResult>>();
+            var translator = _serviceProvider.GetService<ICanTranslate<TFirst, TFinal>>();
 
             if (translator != null)
             {
-                return translator.TranslateTo(initial);
+                return translator.TranslateTo(first);
             }
 
-            throw new ArgumentNullException(nameof(initial), $"The translator for {typeof(TInitial)} to {typeof(TResult)} could not be found. Did you define one?");
+            throw new ArgumentNullException(nameof(first), $"The translator for {typeof(TFirst)} to {typeof(TFinal)} could not be found. Did you define one?");
+        }
+
+        /// <inheritdoc/>
+        public TFinal Translate<TFirst, TSecond, TFinal>(TFirst first, TSecond second)
+        {
+            var translator = _serviceProvider.GetService<ICanTranslate<TFirst, TSecond, TFinal>>();
+
+            if (translator != null)
+            {
+                return translator.TranslateTo(first, second);
+            }
+
+            throw new ArgumentNullException(nameof(first), $"The translator from {typeof(TFirst)} and {typeof(TSecond)} to {typeof(TFinal)} could not be found. Did you define one?");
+        }
+
+        /// <inheritdoc/>
+        public TFinal Translate<TFirst, TSecond, TThird, TFinal>(TFirst first, TSecond second, TThird third)
+        {
+            var translator = _serviceProvider.GetService<ICanTranslate<TFirst, TSecond, TThird, TFinal>>();
+
+            if (translator != null)
+            {
+                return translator.TranslateTo(first, second, third);
+            }
+
+            throw new ArgumentNullException(nameof(first), $"The translator from {typeof(TFirst)} and {typeof(TSecond)} and {typeof(TThird)} to {typeof(TFinal)} could not be found. Did you define one?");
         }
     }
 }
