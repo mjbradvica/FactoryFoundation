@@ -29,6 +29,9 @@ FactoryFoundation gives you:
     - [Defining Factories](#defining-factories)
     - [Using the Translator interface](#using-the-translator-interface)
     - [Factory Helpers](#factory-helpers)
+  - [Detailed Usage](#detailed-usage)
+    - [Accepting Dependencies](#accepting-dependencies)
+    - [Returning Multiple Types](#returning-multiple-types)
   - [FAQ](#faq)
 
 ## Samples
@@ -84,7 +87,7 @@ public class Program
 }
 ```
 
-### Quick Start
+## Quick Start
 
 ### Defining Factories
 
@@ -94,7 +97,7 @@ Defining a factory is straight forward, have a class inherit from the "ICanTrans
 public class AirplaneFactory :
     ICanTranslate<Airplane, AirplaneResponse>
 {
-    public AirplaneResponse TranslateTo(Airplane initial)
+    public AirplaneResponse TranslateTo(Airplane first)
     {
         // implementation.
     }
@@ -140,6 +143,35 @@ public class MyService
 
 > You may also pass the "ICanTranslate" interface if you just need one specific translation.
 
+### Multiple Types
+
+FactoryFoundation currently supports mapping from one, two, or three types down to a single result.
+
+```csharp
+public class MyFactory : 
+    ICanTranslate<int, string, string>,
+    ICanTranslate<int, double, string, string>
+{
+    public string TranslateTo(int first, string second)
+    {
+        return $"{first} & {second}";
+    }
+
+    public string TranslateTo(int first, double second, string third)
+    {
+        return $"{first}, {second}, {third}";
+    }
+}
+```
+
+The number of types is determined by how many types you pass into each interface.
+
+```csharp
+var firstResult = _translator.Translate<int, string, string>(1, "hello");
+
+var secondResult = _translator.Translate<int, double, string, string>(4, 3.33, "hi");
+```
+
 ### Factory Helpers
 
 FactoryFoundation comes with a small helper to make object creation easier.
@@ -149,6 +181,51 @@ var envelope = FactoryHelpers.TryCreateValidate(() => new Widget());
 ```
 
 The function will attempt to create the object specified, if an exception is thrown, the proper envelope response will be returned.
+
+## Detailed Usage
+
+### Accepting Dependencies
+
+FactoryFoundation is 100% dependency injection compliant. You may pass dependencies to your factory if required.
+
+```csharp
+public class MyFactory
+    : ICanTranslate<string, string>
+{
+    private readonly TimeProvider _timeProvider;
+
+    public MyFactory(TimeProvider timeProvider)
+    {
+        _timeProvider = timeProvider;
+    }
+
+    public string TranslateTo(string first)
+    {
+        return $"{first} at: {_timeProvider.GetUtcNow()}";
+    }
+}
+```
+
+### Returning Multiple Types
+
+If you need to return multiple types, the best way to do so is via a Tuple or create a custom type.
+
+```csharp
+public class MyFactory : 
+    ICanTranslate<int, string, Tuple<int, string>>
+    ICanTranslate<int, string, MyCustomType>
+{
+    public Tuple<int, string> TranslateTo(int first, string second)
+    {
+        return new Tuple<int, string>(first, second);
+    }
+
+    public MyCustomType TranslateTo(int first, string second)
+    {
+        return new MyCustomType(first, second);
+    }
+}
+```
 
 ## FAQ
 
