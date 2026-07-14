@@ -1,4 +1,4 @@
 {
-    "ignorePaths": ["Directory.Build.props", ".gitignore", ".editorconfig", "./**/*.csproj"],
+    "ignorePaths": ["Directory.Build.props", ".gitignore", ".gitattributes", ".editorconfig", "./**/*.csproj"],
     "words": ["Bradvica"]
 }
